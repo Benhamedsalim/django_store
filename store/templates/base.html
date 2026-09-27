@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" class="h-100" dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>متجر كتب</title>
+  <script defer src="{% static 'js/830.66d67bb4.js' %}"></script>
+  <script defer src="{% static 'js/app.2fe33112.js' %}"></script>
+  <link href="{% static 'css/830.css' %}" rel="stylesheet">
+  <link href="{% static 'css/app.css' %}" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100 bg-light">
+    {% include 'partials/header.html' %}
+
+  <main>
+      {% block content %}
+        {% endblock %}
+
+  </main>
+    {% include 'partials/footer.html' %}
+    <script src = "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src = "https://js.stripe.com/v3/"></script>
+    <script src = "{% static 'js/main.js' %}" ></script>
+    <script src="{% static 'js/stripe.js' %}"
+</body>
+
+</html>

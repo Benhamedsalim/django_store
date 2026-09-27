@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +27,7 @@ SECRET_KEY = 'django-insecure-2eb#6cuq4hw@9iij0klx@5yd6$a2917r0wcbwae(zf(0sq+_en
 DEBUG = True
 
 ALLOWED_HOSTS = []
+LANGUAGE_CODE = 'ar-sa'
 
 
 # Application definition
@@ -37,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'paypal.standard.ipn',
     'store',
-    'checkout'
+    'checkout',
+    'reports'
 ]
 
 MIDDLEWARE = [
@@ -56,13 +60,16 @@ ROOT_URLCONF = 'django_ecommerce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            'templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'store.custom_context_processor.store_website'
             ],
         },
     },
@@ -116,9 +123,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media'
+
+CURRENCY = 'USD'
+
+
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '9fb7e593ed44db'
+EMAIL_HOST_PASSWORD = '4f5d27242af4b8'
+EMAIL_PORT = '2525'
+
+SITE_URL = 'http://127.0.0.1:8000/'
+
+STRIPE_PUBLISHABLE_KEY = 'pk-'
+STRIPE_SECRET_KEY = 'sk-'
+STRIPE_ENDPOINT_SECRET = 'whsec_...'
+PAYPAL_EMAIL ='sb-fyro4847911135@business.example.com'
+PAYPAL_TEST = True
+
